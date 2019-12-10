@@ -3,11 +3,41 @@ import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TimedExecutor;
 public class ReverseWords {
-
+/*
+idea: 5
+Imp: 17
+ */
   public static void reverseWords(char[] input) {
-    // TODO - you fill in here.
+    int n = input.length;
+    reverse(input, 0, n-1);
+
+    int st = 0, end = 0;
+    for(int i=0;i<n;i++){
+      if(i == input.length-1){
+        end = i;
+        reverse(input, st, end);
+        break;
+      }
+
+      if(input[i] == ' '){
+        end = i-1;
+        reverse(input, st, end);
+        st = i+1;
+      }
+    }
+
     return;
   }
+
+  private static void reverse(char[] input, int left, int right) {
+    while (left<right){
+      char temp = input[left];
+      input[left++] = input[right];
+      input[right--] = temp;
+    }
+  }
+
+
   @EpiTest(testDataFile = "reverse_words.tsv")
   public static String reverseWordsWrapper(TimedExecutor executor, String s)
       throws Exception {
