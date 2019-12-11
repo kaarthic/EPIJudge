@@ -9,9 +9,49 @@ public class DoListsOverlap {
 
   public static ListNode<Integer> overlappingLists(ListNode<Integer> l0,
                                                    ListNode<Integer> l1) {
-    // TODO - you fill in here.
-    return null;
+
+    /*
+    1. Find the length of the 2
+    2. Get the difference
+    3. Advance the pointers and see if they match
+     */
+
+    int len0 = findLength(l0);
+    int len1 = findLength(l1);
+
+    if(len0>len1){
+      l0 = moveByDiff(len0-len1, l0);
+    }else {
+      l1 = moveByDiff(len1-len0, l1);
+    }
+
+    while (l0!=null && l1!=null && l0!=l1){
+      l0 = l0.next;
+      l1 = l1.next;
+    }
+
+    return l1;//l0 can be returned as well
   }
+
+  private static ListNode<Integer> moveByDiff(int diff, ListNode<Integer> l0) {
+    while (diff-->0){
+      l0 = l0.next;
+    }
+
+    return l0;
+  }
+
+  private static int findLength(ListNode<Integer> l0) {
+    int len = 0;
+    while (l0!=null){
+      len++;
+      l0 = l0.next;
+    }
+
+    return len;
+  }
+
+
   @EpiTest(testDataFile = "do_lists_overlap.tsv")
   public static void
   overlappingListsWrapper(TimedExecutor executor, ListNode<Integer> l0,

@@ -3,14 +3,36 @@ import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TestFailure;
 public class RunLengthCompression {
-
+/*
+Idea: 5
+Imp:20
+ */
   public static String decoding(String s) {
-    // TODO - you fill in here.
-    return "";
+    StringBuilder sb = new StringBuilder();
+    int number = 0;
+    for(int i=0;i<s.length();i++){
+      if(Character.isDigit(s.charAt(i))) number = (number*10)+(s.charAt(i)-'0');
+      else {
+        while (number>0) {
+          sb.append(s.charAt(i));
+          number--;
+        }
+      }
+    }
+    System.out.println(sb.toString());
+    return sb.toString();
   }
   public static String encoding(String s) {
-    // TODO - you fill in here.
-    return "";
+    StringBuilder sb = new StringBuilder();
+    int count = 0;
+
+    for(int i=0;i<s.length();i++){
+      if(i == s.length()-1 || s.charAt(i)!=s.charAt(i+1)){
+        sb.append(count);
+        sb.append(s.charAt(i));
+      }else count++;
+    }
+    return sb.toString();
   }
   @EpiTest(testDataFile = "run_length_compression.tsv")
   public static void rleTester(String encoded, String decoded)

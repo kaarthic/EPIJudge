@@ -6,7 +6,7 @@ public class DeleteKthLastFromList {
 
   // Assumes L has at least k nodes, deletes the k-th last node in L.
   public static ListNode<Integer> removeKthLast(ListNode<Integer> L, int k) {
-    // TODO - you fill in here.
+
     return null;
   }
 

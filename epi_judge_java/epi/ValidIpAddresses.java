@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.function.BiPredicate;
 public class ValidIpAddresses {
   @EpiTest(testDataFile = "valid_ip_addresses.tsv")
-
+/*
+Idea: 20
+Imp: 60
+ */
   public static List<String> getValidIpAddress(String s) {
     List<String> ipAddresses = new ArrayList<>();
     String ipAddress = "";
@@ -21,7 +24,6 @@ public class ValidIpAddresses {
 
   private static void getValidIpAddress(String s, int sIdx, int part, String ipAddress, List<String> ipAddresses) {
     if(part == 5 && sIdx == s.length()){
-      System.out.println("---"+ipAddress.substring(0,ipAddress.length()-1));
       ipAddresses.add(ipAddress.substring(0,ipAddress.length()-1));
       return;
     }
@@ -29,14 +31,13 @@ public class ValidIpAddresses {
     if(part == 5 && sIdx!=s.length()) return;
     if(sIdx == s.length() && part != 5) return;
 
-    for(int i=sIdx+1;i<s.length();i++){
-      String partCand = s.substring(sIdx,i);
+    for(int i=sIdx;i<s.length();i++){
+      String partCand = s.substring(sIdx,i+1);
       if(!isValid(partCand)){
-        System.out.println();
         return;
       }
       //if(isValid(partCand))
-      getValidIpAddress(s,i, part+1, ipAddress+partCand+".",ipAddresses);
+      getValidIpAddress(s,i+1, part+1, ipAddress+partCand+".",ipAddresses);
     }
 
   }
