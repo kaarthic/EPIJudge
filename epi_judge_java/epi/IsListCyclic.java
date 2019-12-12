@@ -7,16 +7,17 @@ public class IsListCyclic {
 
   public static ListNode<Integer> hasCycle(ListNode<Integer> head) {
     ListNode<Integer> slow = head, fast = head;
+    if(head == null) return null;
     int cycleLen = 0;
     while(fast!=null && fast.next!=null){
       slow = slow.next;
       fast = fast.next.next;
       if(slow == fast){
         //has a cycle
-        fast = fast.next;
-        cycleLen++;
+        //fast = fast.next;
+        //cycleLen++;
 
-        while(slow!=fast) cycleLen++;
+        //while(slow!=fast) cycleLen++;
 
         fast = head;
 
