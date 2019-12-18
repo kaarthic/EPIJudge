@@ -20,7 +20,12 @@ public class KthNodeInTree {
 
   public static BinaryTreeNode<Integer>
   findKthNodeBinaryTree(BinaryTreeNode<Integer> tree, int k) {
-    // TODO - you fill in here.
+    if(k==tree.left.size+1) return  tree;
+    if(k<=tree.left.size){
+      return findKthNodeBinaryTree(tree.left, tree.left.size-k);
+    }else {
+      return findKthNodeBinaryTree(tree.right, )
+    }
     return null;
   }
   public static BinaryTreeNode<Integer>
