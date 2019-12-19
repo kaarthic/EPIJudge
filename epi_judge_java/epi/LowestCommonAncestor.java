@@ -16,11 +16,12 @@ public class LowestCommonAncestor {
     BinaryTreeNode right = LCA(root.right, node0, node1);
 
     if(left== null && right==null) return null;
-    if((left.data == node0.data || left.data == node1.data)&&
-            (right.data == node0.data || right.data == node1.data)) return  root;
-    if(left.data == node0.data || left.data == node1.data) return left;
-    if(right.data == node0.data || right.data == node1.data) return right;
-
+    if(left!=null && right!=null) {
+      if ((left.data == node0.data || left.data == node1.data) &&
+              (right.data == node0.data || right.data == node1.data)) return root;
+      if (left.data == node0.data || left.data == node1.data) return left;
+      if (right.data == node0.data || right.data == node1.data) return right;
+    }
     if(left!=null) return left;
     if(right!=null) return right;
 

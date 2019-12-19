@@ -3,7 +3,10 @@ import epi.test_framework.EpiTest;
 import epi.test_framework.GenericTest;
 import epi.test_framework.TimedExecutor;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
 public class TreeRightSibling {
   public static class BinaryTreeNode<T> {
     public T data;
@@ -14,7 +17,22 @@ public class TreeRightSibling {
   }
 
   public static void constructRightSibling(BinaryTreeNode<Integer> tree) {
-    // TODO - you fill in here.
+    if(tree == null) return;
+    Queue<BinaryTreeNode<Integer>> q = new LinkedList<>();
+    q.add(tree);
+
+    while (!q.isEmpty()){
+      int size = q.size();
+      while (size-->0){
+        BinaryTreeNode<Integer> curr = q.poll();
+        if(size>0){
+          curr.next = q.peek();
+        }
+        if(curr.left!=null) q.add(curr.left);
+        if(curr.right!=null) q.add(curr.right);
+      }
+
+    }
     return;
   }
   private static BinaryTreeNode<Integer>

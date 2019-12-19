@@ -7,12 +7,63 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 public class TreeExterior {
-
+/*
+https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/
+ */
   public static List<BinaryTreeNode<Integer>>
   exteriorBinaryTree(BinaryTreeNode<Integer> tree) {
-    // TODO - you fill in here.
-    return Collections.emptyList();
+    List<BinaryTreeNode<Integer>> result = new ArrayList<>();
+    if(tree == null) return result;
+    result.add(tree);
+    exploreLeftBoundary(tree.left, result);// WARNING: exploreLeftBoundary(tree, result); would duplicate count the root
+    /*
+    Arguments
+	arg1:     ["2"]
+
+Failure info
+	expected: [2]
+	result:   [2, 2]
+	if
+	exploreBottomBoundary(tree, result);
+     */
+    exploreBottomBoundary(tree.left, result);
+    exploreBottomBoundary(tree.right, result);
+    exploreRightBoundary(tree.right, result);// WARNING: exploreRightBoundary(tree, result); would duplicate count the root
+    return result;
   }
+
+  private static void exploreRightBoundary(BinaryTreeNode<Integer> tree, List<BinaryTreeNode<Integer>> result) {
+    if(tree == null) return;
+
+    if(tree.right!=null){
+      exploreRightBoundary(tree.right, result);
+      result.add(tree);
+    }else if(tree.left!=null){
+      exploreRightBoundary(tree.left, result);
+      result.add(tree);
+    }
+  }
+
+  private static void exploreBottomBoundary(BinaryTreeNode<Integer> tree, List<BinaryTreeNode<Integer>> result) {
+    if(tree == null) return;
+
+    if(tree.left == null && tree.right == null) result.add(tree);
+    exploreBottomBoundary(tree.left, result);
+    exploreBottomBoundary(tree.right, result);
+  }
+
+  private static void exploreLeftBoundary(BinaryTreeNode<Integer> tree, List<BinaryTreeNode<Integer>> result) {
+    if(tree == null) return;
+
+    if(tree.left!=null){
+      result.add(tree);
+      exploreLeftBoundary(tree.left, result);
+    }else if(tree.right!=null){
+      result.add(tree);
+      exploreLeftBoundary(tree.right, result);
+    }
+  }
+
   private static List<Integer> createOutputList(List<BinaryTreeNode<Integer>> L)
       throws TestFailure {
     if (L.contains(null)) {

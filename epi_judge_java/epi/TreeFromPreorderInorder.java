@@ -8,17 +8,20 @@ public class TreeFromPreorderInorder {
   public static BinaryTreeNode<Integer>
   binaryTreeFromPreorderInorder(List<Integer> preorder, List<Integer> inorder) {
 
-    return binaryTreeFromPreorderInorder(preorder, inorder, 0, inorder.size()-1);
+    return binaryTreeFromPreorderInorder(preorder, inorder, 0, preorder.size()-1);
   }
-
+/*
+refer to https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34538/My-Accepted-Java-Solution
+ */
   private static BinaryTreeNode<Integer> binaryTreeFromPreorderInorder(List<Integer> preorder, List<Integer> inorder, int left, int right) {
     if(left>right) return null;
-    if(preOrderIdx>=preorder.size()) return null;
-    BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(preorder.get(preOrderIdx++));
+    BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(preorder.get(preOrderIdx));
     if(left==right) return root;
     int inOrderidx = findEleInorder(inorder, root.data);
-    root.left = binaryTreeFromPreorderInorder(preorder, inorder, 0, inOrderidx-1);
-    root.right = binaryTreeFromPreorderInorder(preorder, inorder, inOrderidx+1, inorder.size()-1);
+    preOrderIdx++;
+    root.left = binaryTreeFromPreorderInorder(preorder, inorder, left, inOrderidx-1);
+    root.right = binaryTreeFromPreorderInorder(preorder, inorder, inOrderidx+1, right);
+
     return root;
   }
 
@@ -30,7 +33,7 @@ public class TreeFromPreorderInorder {
   }
 
 
-  static int preOrderIdx = 0;
+   static int preOrderIdx = 0;
 
   public static void main(String[] args) {
     System.exit(
