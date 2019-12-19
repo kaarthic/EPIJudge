@@ -24,7 +24,7 @@ public class KthNodeInTree {
     if(k<=tree.left.size){
       return findKthNodeBinaryTree(tree.left, tree.left.size-k);
     }else {
-      return findKthNodeBinaryTree(tree.right, )
+      //return findKthNodeBinaryTree(tree.right, )
     }
     return null;
   }
