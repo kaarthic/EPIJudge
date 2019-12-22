@@ -6,8 +6,23 @@ public class SearchFirstKey {
   @EpiTest(testDataFile = "search_first_key.tsv")
 
   public static int searchFirstOfK(List<Integer> A, int k) {
-    // TODO - you fill in here.
-    return 0;
+    if(A==null || A.size()==0) return -1;
+    int left = 0, right = A.size()-1;
+    //if equal -> cut right but mid might be a candidate
+    //if mid<k -> cut left
+    //if mid>k -> cut right
+    while(left<right) {
+      int mid = (left + right) / 2;
+      if (A.get(mid) == k) {
+        right = mid;
+      } else if (A.get(mid) < k) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+
+    return (A.get(left)==k)?left:-1;
   }
 
   public static void main(String[] args) {

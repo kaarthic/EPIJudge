@@ -6,8 +6,16 @@ public class SearchRowColSortedMatrix {
   @EpiTest(testDataFile = "search_row_col_sorted_matrix.tsv")
 
   public static boolean matrixSearch(List<List<Integer>> A, int x) {
-    // TODO - you fill in here.
-    return true;
+    if(A == null || A.size() == 0) return false;
+    int rowIdx = A.size()-1;
+    int colIdx = 0;
+
+    while (rowIdx>=0 && colIdx<A.get(0).size()) {
+      if (A.get(rowIdx).get(colIdx) < x) colIdx++;
+      else if (A.get(rowIdx).get(colIdx) > x) rowIdx--;
+      else return true;
+    }
+    return false;
   }
 
   public static void main(String[] args) {
